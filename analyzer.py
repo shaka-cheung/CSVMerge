@@ -41,13 +41,15 @@ for root, subdirs, files in os.walk(walk_dir):
                     data_list.append(values)
                 counter = counter + 1
 
-length = len(data_list[0])
-export_list = []
-for data in data_list:
-    if len(data) == length:
-        export_list.append(data)
+if len(data_list) > 0:
+    export_list = []
+    length = len(data_list[0])
+    for data in data_list:
+        if len(data) == length:
+            export_list.append(data)
 
-zipped = zip(*export_list)
-export_data = list(zipped)
-
-writeData(export_file, export_data)
+    zipped = zip(*export_list)
+    export_data = list(zipped)
+    if os.path.isfile(export_file):
+        os.remove(export_file)
+    writeData(export_file, export_data)
